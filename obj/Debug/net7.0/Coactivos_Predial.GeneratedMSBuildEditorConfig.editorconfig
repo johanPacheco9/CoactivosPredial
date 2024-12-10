@@ -1,0 +1,83 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Coactivos_Predial
+build_property.RootNamespace = Coactivos_Predial
+build_property.ProjectDir = D:\Net\Coactivo_Predial\Coactivos_Predial\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Net\Coactivo_Predial\Coactivos_Predial
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PCoctivos/Pcoactivos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUENvY3Rpdm9zXFBjb2FjdGl2b3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PConsulta/Consulta.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUENvbnN1bHRhXENvbnN1bHRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PImportacion/Pimportacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUEltcG9ydGFjaW9uXFBpbXBvcnRhY2lvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PInfractores/Pinfractores.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUEluZnJhY3RvcmVzXFBpbmZyYWN0b3Jlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PParametros/Pparametros.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUFBhcmFtZXRyb3NcUHBhcmFtZXRyb3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PPersuasivos/Persuasivo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUFBlcnN1YXNpdm9zXFBlcnN1YXNpdm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PUsers/PUsuarios.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUFVzZXJzXFBVc3Vhcmlvcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Shared/Components/Busqueda.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcQnVzcXVlZGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PLogin/LogIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUExvZ2luXExvZ0luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PLogin/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUExvZ2luXFJlZ2lzdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/PLogOut/CerrarSesion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUExvZ091dFxDZXJyYXJTZXNpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Net/Coactivo_Predial/Coactivos_Predial/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

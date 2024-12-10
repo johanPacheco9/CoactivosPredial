@@ -1,0 +1,128 @@
+﻿@using Coactivos_Predial.Models;
+@using Coactivos_Predial.Shared.Components.ComponentServices.BusquedaService;
+@using Coactivos_Predial.Shared.Models;
+@using System.Dynamic;
+@using Coactivos_Predial.Shared.Services;
+@using Radzen;
+@using Radzen.Blazor;
+@inject BusquedaService busquedaService;
+@inject NavigationManager navigationManager
+@inject DialogService dialogService
+@inject IPrediosService comparendoService;
+
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+       <div class="container-fluid">
+
+            <div class="col">
+                <div class="form-group row ms-1">
+                    <label class="">No. Documento</label>
+                    <div class="input-group">
+                        <input type="text" @bind="pcedula" class="form-control" id="comparendoBusqueda" name="busqueda" />
+                        <div class="input-group-append">
+                            <button @onclick="ComparendoByCedula" class="btn btn-primary" style="height: 28px; display: inline-flex; align-items: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+<RadzenDataGrid AllowFiltering="true" FilterPopupRenderMode="PopupRenderMode.OnDemand" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
+                AllowSorting="true" Data="@comparendosinfo" TItem="ComparendoInfo" ColumnWidth="200px"
+                SelectionMode="DataGridSelectionMode.Single" @bind-Value="@selectedComparendo">
+    <Columns>
+                    <RadzenDataGridColumn TItem="ComparendoInfo" Property="codigo" width="190px" Title="Codigo Predial" Sortable="false" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="ComparendoInfo" Property="Nombre" Title="Nombre" HeaderCssClass="rz-background-color-secondary-lighter" />
+                    <RadzenDataGridColumn TItem="ComparendoInfo" Property="dir" Width="120px" Title="Direccion" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                    <RadzenDataGridColumn TItem="ComparendoInfo" Property="avaluo" Title="Avaluo" Width="160px" Filterable="false"  HeaderCssClass="rz-background-color-secondary-lighter">
+                        <Template Context="data">
+                            <span>@data.avaluo.ToString("C")</span>
+                        </Template>
+                    </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
+<hr />
+<div style="display: flex; align-items: center; margin-bottom: 16px">
+    @if (selectedComparendo?.Any() == true)
+    {
+        <div style="margin-left: 16px; pt-1">
+          <RadzenButton Style="border-radius:15px;"  Click="@EnviarDatos" Text="Seleccionar" />
+        </div>
+    }
+</div>
+
+        </div>
+    </section>
+        </div>
+
+
+
+
+
+@code {
+
+    private IEnumerable<ComparendoInfo> comparendosinfo = Enumerable.Empty<ComparendoInfo>();
+    private IList<ComparendoInfo> selectedComparendo = new List<ComparendoInfo>();
+    private string pcedula;
+    public ComparendoInfo liquidacioneslist { get; set; }
+
+    private async Task ComparendoByCedula()
+    {
+        if (pcedula != null)
+        {
+            comparendosinfo = await comparendoService.GetInfoComparendo(pcedula.Trim());
+            if (comparendosinfo != null && liquidacioneslist != null)
+            {
+                foreach (var comparendo in comparendosinfo)
+                {
+                    // Itera sobre las propiedades del objeto 'ComparendoInfo' e imprímelas con comprobación de nulos
+                    foreach (var property in typeof(ComparendoInfo).GetProperties())
+                    {
+                        var propertyName = property.Name;
+                        var propertyValue = property.GetValue(comparendo);
+                        var displayValue = propertyValue != null ? propertyValue.ToString() : "N/A";
+
+                    }
+                }
+            }
+            else
+            {
+                // Manejar el caso cuando no se encuentran comparendos
+                Console.WriteLine("No se encontraron comparendos.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("La cedula no puede ir vacía");
+        }
+        
+    }
+
+    
+
+    private async Task EnviarDatos()
+    {
+        try
+        {
+            if (selectedComparendo != null && selectedComparendo.Any())
+            {
+                string comparendocapturadobusqueda = selectedComparendo[0].codigo;
+                await busquedaService.ComparendoCapturado(comparendocapturadobusqueda);
+                Console.WriteLine($"El comparendo enviado es: {comparendocapturadobusqueda}");
+                dialogService.Close();
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al asignar comparendo: {ex.Message}");
+        }
+    }
+
+}

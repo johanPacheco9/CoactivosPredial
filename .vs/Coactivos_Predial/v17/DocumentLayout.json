@@ -1,0 +1,330 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Dataset\\Coactivos_Predial\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\appdbcontext\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\appdbcontext\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\spredios\\prediosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\spredios\\prediosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\pages\\pconsulta\\consulta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:pages\\pconsulta\\consulta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\controller\\archivoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:controller\\archivoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\pages\\_host.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:pages\\_host.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\slogin\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\slogin\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\sdatabase\\iconnectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\sdatabase\\iconnectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\sdatabase\\connectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\sdatabase\\connectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\models\\documentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\models\\documentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\pages\\pinfractores\\pinfractores.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:pages\\pinfractores\\pinfractores.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\pages\\pusers\\pusuarios.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:pages\\pusers\\pusuarios.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\models\\municipiosingleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\models\\municipiosingleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\suser\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\suser\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\spropietarios\\propietariosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\spropietarios\\propietariosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\sparametros\\parametroservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\sparametros\\parametroservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\simportados\\importadosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\simportados\\importadosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|d:\\dataset\\coactivos_predial\\shared\\services\\spredios\\iprediosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22DF2379-6E63-425B-9A3A-691407C0F976}|Coactivos_Predial.csproj|solutionrelative:shared\\services\\spredios\\iprediosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\AppDbContext\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Shared\\AppDbContext\\AppDbContext.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\AppDbContext\\AppDbContext.cs",
+              "RelativeToolTip": "Shared\\AppDbContext\\AppDbContext.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAA1wBcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:56:17.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Consulta.razor",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Pages\\PConsulta\\Consulta.razor",
+              "RelativeDocumentMoniker": "Pages\\PConsulta\\Consulta.razor",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Pages\\PConsulta\\Consulta.razor",
+              "RelativeToolTip": "Pages\\PConsulta\\Consulta.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAOoCAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-03T16:10:34.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Host.cshtml",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Pages\\_Host.cshtml",
+              "RelativeDocumentMoniker": "Pages\\_Host.cshtml",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Pages\\_Host.cshtml",
+              "RelativeToolTip": "Pages\\_Host.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACUAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-13T17:00:14.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-13T18:00:03.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ArchivosController.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Controller\\ArchivosController.cs",
+              "RelativeDocumentMoniker": "Controller\\ArchivosController.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Controller\\ArchivosController.cs",
+              "RelativeToolTip": "Controller\\ArchivosController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwBYAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-04T15:02:16.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PrediosService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SPredios\\PrediosService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SPredios\\PrediosService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SPredios\\PrediosService.cs",
+              "RelativeToolTip": "Shared\\Services\\SPredios\\PrediosService.cs",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAqwGgAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:39:08.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LoginService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SLogin\\LoginService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SLogin\\LoginService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SLogin\\LoginService.cs",
+              "RelativeToolTip": "Shared\\Services\\SLogin\\LoginService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADwAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:24:19.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ConnectionService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SDatabase\\ConnectionService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SDatabase\\ConnectionService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SDatabase\\ConnectionService.cs",
+              "RelativeToolTip": "Shared\\Services\\SDatabase\\ConnectionService.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAIwCYAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:26:00.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IConnectionService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SDatabase\\IConnectionService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SDatabase\\IConnectionService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SDatabase\\IConnectionService.cs",
+              "RelativeToolTip": "Shared\\Services\\SDatabase\\IConnectionService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:30:09.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PUsuarios.razor",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Pages\\PUsers\\PUsuarios.razor",
+              "RelativeDocumentMoniker": "Pages\\PUsers\\PUsuarios.razor",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Pages\\PUsers\\PUsuarios.razor",
+              "RelativeToolTip": "Pages\\PUsers\\PUsuarios.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-03T16:03:23.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Documentos.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Models\\Documentos.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\Documentos.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Models\\Documentos.cs",
+              "RelativeToolTip": "Shared\\Models\\Documentos.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T21:34:42.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ParametroService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SParametros\\ParametroService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SParametros\\ParametroService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SParametros\\ParametroService.cs",
+              "RelativeToolTip": "Shared\\Services\\SParametros\\ParametroService.cs",
+              "ViewState": "AQIAAHoAAAAAAAAAAAAwwIIAAABnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:45:58.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Pinfractores.razor",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Pages\\PInfractores\\Pinfractores.razor",
+              "RelativeDocumentMoniker": "Pages\\PInfractores\\Pinfractores.razor",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Pages\\PInfractores\\Pinfractores.razor",
+              "RelativeToolTip": "Pages\\PInfractores\\Pinfractores.razor",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAcwFsAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-03T21:21:05.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ImportadosService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SImportados\\ImportadosService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SImportados\\ImportadosService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SImportados\\ImportadosService.cs",
+              "RelativeToolTip": "Shared\\Services\\SImportados\\ImportadosService.cs",
+              "ViewState": "AQIAAKgAAAAAAAAAAAAwwLoAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:45:46.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PropietariosService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SPropietarios\\PropietariosService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SPropietarios\\PropietariosService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SPropietarios\\PropietariosService.cs",
+              "RelativeToolTip": "Shared\\Services\\SPropietarios\\PropietariosService.cs",
+              "ViewState": "AQIAAM0AAAAAAAAAAAAswPYAAABnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:46:16.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SUser\\UserService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SUser\\UserService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SUser\\UserService.cs",
+              "RelativeToolTip": "Shared\\Services\\SUser\\UserService.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwAkAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:38:54.531Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MunicipioSingleton.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Models\\MunicipioSingleton.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\MunicipioSingleton.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Models\\MunicipioSingleton.cs",
+              "RelativeToolTip": "Shared\\Models\\MunicipioSingleton.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T15:23:04.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IPrediosService.cs",
+              "DocumentMoniker": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SPredios\\IPrediosService.cs",
+              "RelativeDocumentMoniker": "Shared\\Services\\SPredios\\IPrediosService.cs",
+              "ToolTip": "D:\\Dataset\\Coactivos_Predial\\Shared\\Services\\SPredios\\IPrediosService.cs",
+              "RelativeToolTip": "Shared\\Services\\SPredios\\IPrediosService.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAADgvw0AAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-28T17:26:55.642Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

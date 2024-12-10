@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Coactivos_Predial.props" />
+</Project>

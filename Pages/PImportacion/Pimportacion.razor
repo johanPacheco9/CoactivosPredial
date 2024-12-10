@@ -1,0 +1,362 @@
+﻿@page "/ImportacionPage"
+@using Coactivos_Predial.Shared.Services;
+@using Coactivos_Predial.Shared.Models;
+@using Coactivos_Predial.Shared.Services.SImportados;
+@inject NavigationManager NavigationManager
+@inject DialogService DialogService
+@inject IimportadosService ImportServices;
+@inject TooltipService tooltipService
+
+
+<ul class="nav nav-tabs p-0 me-0" id="custom-content-below-tab" role="tablist">
+    <li class="nav-item">
+        <button type="button" class="nav-link @(tab1 ? "active" : "")" id="pestañaLiquidacion" data-toggle="pill" href="#contenidoLiquidacion" role="tab" aria-controls="contenidoLiquidacion" aria-selected="true" @onclick="() => displayTabs(1)">Importar Predios</button>
+    </li>
+</ul>
+
+@if (tab1)
+{
+    <div class="tab-pane @(tab1 ? "show active" : "")" id="pestañaComp" role="tabpanel" aria-labelledby="pestañaResoluciones">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row bg-transparent">
+                    <div class="col-3">
+                        <InputFile Style="Font-size:12px; border-radius:15px; height:35px;" class="btn btn-primary pull-right" OnChange="Leer_plano"></InputFile>
+                    </div>
+                    <div class="col-2 ms-4">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-danger" @onclick="Procesar_Comp" asp-route-id="">
+                            Procesar
+                        </button>
+                    </div>
+                    @if (bot)
+                    {
+                    <div class="col ms-2 mt-2 p-0">
+                        <RadzenProgressBar @bind-Value="@value" Min="0" Max="@totalLineas"/>
+                    </div>
+                    }
+                    @if (bot2)
+                    {
+                        <div class="col ms-2 mt-2 p-0">
+                        <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="container-fluid pt-2">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <div class="card">
+                            <div class="card-header p-0" style="background-color: #112366; height: 31px;">
+                                    <h5 class="card-title ms-2 mt-1" style="color:white">Importar Predios</h5>
+                            </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body  mt-1">
+                                                <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowGrouping="false" AllowSorting="true" PageSize="8"
+                                                                AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" Data="@Itemlist" TItem="Importados"
+                                                                ColumnWidth="350px" LogicalFilterOperator="LogicalFilterOperator.Or" ShowPagingSummary="true"
+                                                                IsLoading="@isLoading">
+                                                    <Columns>
+                                                            <RadzenDataGridColumn TItem="Importados" Property="codigo" Title="Código Predial" Frozen="true" Width="190px" Filterable HeaderCssClass="rz-background-color-primary-lighter" />
+                                                            <RadzenDataGridColumn TItem="Importados" Property="nombre" Title="Nombre Propietario" Width="120px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                                            <RadzenDataGridColumn TItem="Importados" Property="dir" Title="Dirección" Width="200px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                                            <RadzenDataGridColumn TItem="Importados" Property="cedula" Title="Documento" Width="160px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                                            <RadzenDataGridColumn TItem="Importados" Property="avaluo" Title="Avaluo catastral" Width="160px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter">
+                                                                <Template Context="data">
+                                                                    <span>@data.avaluo.ToString("C")</span>
+                                                                </Template>
+                                                            </RadzenDataGridColumn>
+                                                            <RadzenDataGridColumn TItem="Importados" Width="80px" FilterValue="false" HeaderCssClass="rz-background-color-primary-lighter">
+                                                            <Template Context="agentes">
+                                                            </Template>
+                                                        </RadzenDataGridColumn>
+                                                    </Columns>
+                                                </RadzenDataGrid>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </div><!-- /.container-fluid -->
+            </section>
+    </div>
+
+
+}
+@if (tab2)
+{
+    <div class="tab-pane @(tab2 ? "show active" : "")" id="pestañaPagos" role="tabpanel" aria-labelledby="pestañaResoluciones">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row bg-transparent">
+                    <div class="col-2 ps-0 pe-3 me-5">
+                        <InputFile Style="font-size:12px; border-radius:15px; height:35px;" class="btn btn-primary pull-right" OnChange="Leer_Rec">
+                        </InputFile>
+                    </div>
+                    <div class="col-4 ms-4">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-danger" @onclick="Procesar_Rec" asp-route-id="">
+                            Procesar
+                        </button>
+                    </div>
+                    <div class="col ms-2 mt-2 p-0">
+                        <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid pt-2">
+                <div class="row ">
+                    <div class="col-12 p-0">
+                        <div class="card">
+                            <div class="card-header p-0" style="background-color: #112366; height: 31px;">
+                                    <h5 class="card-title ms-2 mt-1" style="color:white">Importar Recaudo Externo</h5>
+                            </div>
+                                <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body  mt-1">
+                                            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowGrouping="false" AllowSorting="true" PageSize="8"
+                                                            AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" Data="@Itemlistrec" TItem="Recaudo_Externo"
+                                                            ColumnWidth="350px" LogicalFilterOperator="LogicalFilterOperator.Or" ShowPagingSummary="true"
+                                                            IsLoading="@isLoading">
+                                                <Columns>
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="comparendo" Title="Comparendo" Frozen="true" Width="160px" Filterable HeaderCssClass="rz-background-color-secondary-lighter" />
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="fecha" Title="Fecha" Filterable="false" Width="160px" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="hora" Title="Hora" Filterable="false" Width="200px" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="infractor" Title="Infractor" Filterable="false" Width="200px" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="tipo_rec" Title="Tipo Recaudo" Filterable="false" Width="160px" HeaderCssClass="rz-background-color-secondary-lighter"/>
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="cheque" Title="Cheque" Filterable="false" Width="160px" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                                        <RadzenDataGridColumn TItem="Recaudo_Externo" Property="efectivo" Title="Valor" Filterable="false" Width="160px" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                                    <RadzenDataGridColumn TItem="Recaudo_Externo" Width="80px" FilterValue="false">
+                                                        <Template Context="agentes">
+                                                        </Template>
+                                                    </RadzenDataGridColumn>
+                                                </Columns>
+                                            </RadzenDataGrid>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+
+}
+
+@code
+{
+
+    public List<Importados> Itemlist { get; set; } = new List<Importados>();
+    public List<Recaudo_Externo> Itemlistrec { get; set; } = new List<Recaudo_Externo>();
+
+    IQueryable<Importados> data;
+    IQueryable<Recaudo_Externo> datarec;
+    bool isLoading = false;
+    private bool tab1 = true;
+    private bool tab2 = false;
+    private bool bot = true;
+    private bool bot2 = false;
+    double value = 0;
+    int totalLineas = 0;
+    long maxFileSize = 1024L * 1024L * 1024L * 2L;
+
+    public void displayTabs(int TabNumber)
+    {
+        switch (TabNumber)
+        {  
+            case 1:
+                this.tab1 = true;
+                this.tab2 = false;
+                break;
+            case 2:
+                this.tab1 = false;
+                this.tab2 = true;
+                break;
+        }
+
+    }
+
+
+    private async Task Leer_plano(InputFileChangeEventArgs e)
+    {
+        if (e != null && e.File != null)
+        {
+            var archivo = e.File;
+
+            try
+            {
+
+                int xestado = 1;
+                using (var stream = archivo.OpenReadStream(maxFileSize))
+                using (var reader = new StreamReader(stream))
+                {
+                    while (await reader.ReadLineAsync() != null)
+                    {
+                        totalLineas++;
+                    }
+                }
+                using (var stream = archivo.OpenReadStream(maxFileSize))
+                using (var reader = new StreamReader(stream))
+                {
+                    ImportServices.DeleteAll();
+
+                    string linea;
+                    string td;
+                    while ((linea = await reader.ReadLineAsync()) != null)
+                    {
+                        Importados importObj = new Importados();
+                            try
+                            {
+
+                                importObj.codigo = linea.Substring(297, 15);
+
+//                                Console.WriteLine($"Procesando : {importObj.codigo}");
+                                importObj.cedula = linea.Substring(139, 12);
+                                importObj.nombre = linea.Substring(37, 60);
+                                importObj.dir = linea.Substring(151, 60);
+                                td = linea.Substring(138, 1);
+                                importObj.avaluo = float.Parse(linea.Substring(274, 14));
+                                importObj.area_tet = int.Parse(linea.Substring(253, 14));
+                                importObj.area_con = int.Parse(linea.Substring(268, 6));
+                                if (td == "C")
+                                { importObj.tipo = 1; }
+                                if (td == "N")
+                                { importObj.tipo = 4; }
+                                importObj.matricula = "SIN MATRICULA";
+                                importObj.estado = 1;
+                                importObj.municipio = false;
+                                importObj.exento = false;
+                                importObj.estrato = "1";
+                                importObj.zona = "A";
+                                importObj.desenglobo = false;
+                                await ImportServices.Add(importObj);
+                                value = value + 1;
+                                StateHasChanged();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Error al procesar la línea: {ex.Message}");
+                                continue;
+                            }
+                    }
+                }
+
+                Console.WriteLine("Procesamiento del archivo completo.");
+                await Mostrar_Plano();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al leer el archivo: {ex.Message}");
+            }
+        }
+    }
+
+
+
+    private async Task Leer_Rec(InputFileChangeEventArgs e)
+    {
+        if (e != null && e.File != null)
+        {
+            var archivo = e.File;
+
+            using (var stream = archivo.OpenReadStream())
+            using (var reader = new StreamReader(stream))
+
+            {
+                var contenido = await reader.ReadToEndAsync();
+                var lineas = contenido.Split('\n');
+
+                ImportServices.DeleteRec();
+
+                foreach (var linea in lineas)
+                {
+                    string[] fila = linea.Split(',');
+                    if (fila.Length >= 5)
+                    {
+                        Recaudo_Externo importObj = new Recaudo_Externo();
+                        importObj.comparendo = fila[14];
+                        importObj.infractor = fila[10];
+                        importObj.fecha = DateTime.Parse(fila[1]);
+                        importObj.fecha_real = fila[3];
+                        importObj.hora = fila[2];
+                        importObj.efectivo = double.Parse(fila[6]);
+                        importObj.cheque = double.Parse(fila[7]);
+                        importObj.vlr_adicional =0;
+                        importObj.tipo_rec = int.Parse(fila[11]);
+                        importObj.otro = fila[9];
+                        importObj.cod_canal = fila[4];
+                        importObj.divipo = fila[12];
+                        importObj.recaudo = double.Parse(fila[8]);
+                        importObj.descrip = fila[5];
+                        importObj.num_con = fila[13];
+                        ImportServices.Addrec(importObj);
+                        await Mostrar_rec();
+                    }
+                }
+            }
+
+            Console.WriteLine("Procesamiento del archivo completo.");
+        }
+    }
+
+
+    private async Task Procesar_Comp()
+    {
+        var confirmationResult = await this.DialogService.Confirm("Esta seguro..?", "Procear Archivo", new ConfirmOptions { OkButtonText = "Si", CancelButtonText = "No" });
+        if (confirmationResult == true)
+        {
+            bot2 = true; bot = false; StateHasChanged();
+            await ImportServices.Procesa_Comp(1);
+            await DialogService.Alert("Archivo Procesado.", "Importar Plano", new AlertOptions() { OkButtonText = "Ok", Style = "border-radius:30px;" });
+            bot = true; bot2 = false; StateHasChanged();
+        }
+    }
+
+    private async Task Procesar_Rec()
+    {
+        var confirmationResult = await this.DialogService.Confirm("Esta seguro..?", "Procear Archivo", new ConfirmOptions { OkButtonText = "Si", CancelButtonText = "No" });
+        if (confirmationResult == true)
+        {
+            await ImportServices.Procesa_Rec(1);
+        }
+    }
+
+    public string ruta="d:\\plano_comp.txt";
+
+    protected override async Task OnInitializedAsync()
+    {
+    //    bot = false;
+    }
+
+    private async Task Mostrar_Plano()
+    {
+        await ShowLoading();
+        Itemlist = await ImportServices.GetList();
+        data = Itemlist.AsQueryable();
+        
+    }
+
+    private async Task Mostrar_rec()
+    {
+        await ShowLoading();
+        Itemlistrec = await ImportServices.GetListRec();
+        datarec = Itemlistrec.AsQueryable();
+
+    }
+
+    async Task ShowLoading()
+    {
+        isLoading = true;
+
+        await Task.Yield();
+
+        isLoading = false;
+    }
+
+}

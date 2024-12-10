@@ -1,0 +1,332 @@
+﻿@page "/Coactivospage"
+@using Coactivos_Predial.Models;
+@using Coactivos_Predial.Shared.Components;
+@using Coactivos_Predial.Shared.Models;
+@using Coactivos_Predial.Shared.Services;
+@using Coactivos_Predial.Shared.Components.ComponentServices.BusquedaService;
+@using Coactivos_Predial.Shared.Services.SCoactivos;
+@inject NavigationManager NavigationManager
+@inject DialogService DialogService
+@inject BusquedaService busquedaService
+@inject ICoactivosService CoactivoServices;
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label style="font-size:12px">Opcion</label>
+                        <select @onchange="capturar" id="lClaseVehiculo" class="form-control col-auto" style=" width:180px; font-size: 12px;">
+                            <option value="0">Todos</option>
+                            <option value="1">No. Comparendo</option>
+                            <option value="2">Vigencia</option>
+                            <option value="3">Fecha Comparendo</option>
+                            <option value="4">No. Transaccion</option>
+                        </select>
+                    </div>
+                </div>
+                  <div class="col-3">
+                    <label style="font-size:12px">Codigo Predial</label>
+                        <div class="input-group">
+                        <input type="text" maxlength="20"   disabled="@Iscomp" class="form-control col-auto" @bind="pcomp">
+                        <div class="input-group-append">
+                            <button type="button" @onclick="ShowBusqueda" disabled="@Iscomp" class="btn btn-primary" style="box-shadow:none; border-radius:0; height:28px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16" style="margin-top:5px;">
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                </svg>
+                            </button>
+                        </div>
+                </div>
+                    </div>
+                <div class="col-1 me-2">
+                    <div class="form-group">
+                        <label style="font-size:12px">Desde</label>
+                        <input type="date" disabled="@Isfec"  style="width:125px" class="form-control col-auto" @bind="desde">
+                    </div>
+                </div>
+                <div class="col-1 ms-4 me-2">
+                    <div class="form-group">
+                        <label style="font-size:12px">Hasta</label>
+                            <input type="date" disabled="@Isfec" style="width:125px"  class="form-control col-auto" @bind="hasta">
+                    </div>
+                </div>
+                <div class="col-1 ms-4">
+                    <div class="form-group">
+                        <label style="font-size:12px">Vigencia</label>
+                        <input type="number" style="width:80px;" disabled="@Isvig" class="form-control col-auto" @bind="vig">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label style="font-size:12px">Transaccion</label>
+                        <div class="input-group">
+                            <input type="text" disabled="@Istran" style="width:50px" class="form-control col-auto" @bind="tran">
+                            <div class="input-group-append">
+                                <button type="button" @onclick="Muestra_tran" disabled="@Istran" class="btn btn-primary" style="box-shadow:none; border-radius:0; height:28px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16" style="margin-top:5px;">
+                                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row bg-transparent">
+                <div class="col-sm-1">
+                    <button type="button" Style="font-size:12px; border-radius:15px;" @onclick="Carga_datos" class="btn btn-dark">
+                        Consultar
+                    </button>
+                </div>
+                <div class="col-sm-3 ms-2">
+                    <button type="button" Style="font-size:12px; border-radius:15px;" @onclick="Procesar" class="btn btn-danger">
+                        Pasar a Coactivo
+                    </button>
+                </div>
+                @if (bot)
+                {
+                    <div class="col ms-2 mt-2 p-0">
+                        <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+                    </div>
+                }
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                            <div class="card-header p-0" style="background-color:#112366;  height: 31px;">
+                            <h5 class="card-title ms-2 mt-1" style="color:white">Predios para Coactivo</h5>
+                            </div>
+                        <div class="card-body  mt-1">
+                            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowGrouping="false" AllowSorting="true" PageSize="8"
+                                            AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" Data="@Itemlist" TItem="Coactivos"
+                                            ColumnWidth="350px" LogicalFilterOperator="LogicalFilterOperator.Or" ShowPagingSummary="true"
+                                            IsLoading="@isLoading">
+                                <Columns>
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="id" Title="Expediente" Frozen="true" Width="130px" Filterable HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="comparendo" Title="Codigo Predial" Frozen="true" Width="210px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="fecha_comp" Title="Fecha" Width="120px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="cedula" Title="Cédula" Width="140px" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="nombres" Title="Nombre Propietario" Width="280px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="fecha_mdto" Title="Fecha Mandanmiento" Frozen="true" Filterable="false" Width="160px" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Coactivos" Property="valor" Title="Valor" Width="160px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter">
+                                    </RadzenDataGridColumn>
+                                    <RadzenDataGridColumn TItem="Coactivos" Width="80px" Filterable="false">
+                                    </RadzenDataGridColumn>
+                                </Columns>
+                            </RadzenDataGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+</div>
+
+
+<div class="modal rz-secondary-lightlight" id="detalleModal" tabindex="-1" style="display: @(mostrarModal ? "block" : "none");">
+    <div class="modal-dialog modal-lg" style="border-radius: 30px; box-shadow: 0px 8px 16px rgba(12, 12, 12, 0.8);">
+        <div class="modal-content" style="border-radius:30px;">
+            <div class="modal-header text-white " style="background-color: #112366; border-radius: 30px 30px 0 0; overflow: hidden; height:40px;">
+                <h5 class="modal-title">Transacciones Generadas</h5>
+                <button type="button" class="close" @onclick="CerrarModal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-light bg-gradient">
+                @if (Tranlist != null)
+                {
+                    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowGrouping="false" AllowSorting="true" PageSize="8"
+                                    AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" Data="@Tranlist" TItem="Transac_Report"
+                                    ColumnWidth="350px" SelectionMode="DataGridSelectionMode.Single" @bind-Value="@selectedtran" LogicalFilterOperator="LogicalFilterOperator.Or" ShowPagingSummary="true"
+                                    IsLoading="@isLoading">
+                        <Columns>
+                            <RadzenDataGridColumn TItem="Transac_Report" Property="transaccion" Title="Transacción" Frozen="true" Width="190px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                            <RadzenDataGridColumn TItem="Transac_Report" Property="fecha" Title="Fecha" Width="120px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                            <RadzenDataGridColumn TItem="Transac_Report" Property="No" Title="Cantidad" Width="160px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                            <RadzenDataGridColumn TItem="Transac_Report" Width="80px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter">
+                            </RadzenDataGridColumn>
+                        </Columns>
+                    </RadzenDataGrid>
+
+                }
+
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-secondary" @onclick="CerrarModal">Cerrar</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-primary bg-success text-white" @onclick="EnviarDatos">
+                            <span>Seleccionar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code
+{
+    public List<Coactivos> Itemlist { get; set; } = new List<Coactivos>();
+    public List<Transac_Report> Tranlist { get; set; } = new List<Transac_Report>();
+    private IList<Transac_Report> selectedtran = new List<Transac_Report>();
+    public DateTime desde;
+    public DateTime hasta;
+    public int vig;
+    public int tran;
+    public string pcomp="";
+    private bool mostrarModal = false;
+    protected bool Isvig { get; set; }
+    protected bool Iscomp { get; set; }
+    protected bool Isfec { get; set; }
+    protected bool Istran { get; set; }
+    protected int SelectedItem { get; set; }
+    public bool bot = false;
+    IQueryable<Coactivos> data;
+    IQueryable<Transac_Report> datat;
+    bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Isfec = true; Isvig = true; Iscomp = true; Istran = true;
+        vig = 2023; desde = DateTime.Now; hasta = DateTime.Now;
+    }
+
+    private async Task Muestra_tran()
+    {
+        await ShowLoading();
+        Tranlist = await CoactivoServices.GetListtran("P",1);
+        datat = Tranlist.AsQueryable();
+        MostrarModal(); StateHasChanged();
+    }
+
+    private async Task EnviarDatos()
+    {
+        try
+        {
+            if (selectedtran != null && selectedtran.Any())
+            {
+                tran = selectedtran[0].transaccion;
+                //                Console.WriteLine($"El comparendo enviado es: {cxc}");
+                mostrarModal = false;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al asignar comparendo: {ex.Message}");
+        }
+    }
+
+    private void CerrarModal()
+    {
+        mostrarModal = false;
+    }
+
+    public void MostrarModal()
+    {
+        mostrarModal = true;
+
+    }
+
+    private async Task capturar(ChangeEventArgs e)
+    {
+         SelectedItem = int.Parse((string)e.Value);
+        if (SelectedItem == 0)
+        {
+            Isfec = true; Isvig = true; Iscomp = true; Istran = true;
+        }
+        if (SelectedItem == 3)
+        {
+            Isfec = false; Isvig = true; Iscomp = true; Istran = true;
+        }
+        if (SelectedItem == 2)
+        {
+            Isfec = true; Isvig = false; Iscomp = true; Istran = true;
+        }
+
+        if (SelectedItem == 1)
+        {
+            Isfec = true; Isvig = true; Iscomp = false; Istran = true;
+        }
+        if (SelectedItem == 4)
+        {
+            Isfec = true; Isvig = true; Iscomp = true; Istran = false;
+        }
+    }
+
+    async Task ShowLoading()
+    {
+        isLoading = true;
+
+        await Task.Yield();
+
+        isLoading = false;
+    }
+
+    private async Task Carga_datos()
+    {
+
+        try
+        {
+            await ShowLoading();
+            Itemlist = await CoactivoServices.GetList(SelectedItem, pcomp, desde, hasta, vig, tran);
+            data = Itemlist.AsQueryable();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error en getresoluciones: {ex.Message}");
+        }
+    }
+
+    private async Task Procesar()
+    {
+        var confirmationResult = await this.DialogService.Confirm("Esta seguro..?", "Pasar a Coactivo", new ConfirmOptions { OkButtonText = "Si", Style = "border-radius:30px; height:220px; width:60em;", CancelButtonText = "No" });
+    if (confirmationResult == true)
+        {
+        try
+        {
+            bot = true; StateHasChanged();
+            await CoactivoServices.Procesa_Coactivo(SelectedItem, pcomp, desde, hasta, vig, tran);
+            await DialogService.Alert("Archivo Procesado.", "Coactivo", new AlertOptions() { OkButtonText = "Ok", Style = "border-radius:30px;" });
+            bot = false; StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al generar acuerdo: {ex.Message}");
+        }
+        }
+    }
+
+    private async Task obtenercompare()
+    {
+        try
+        {
+            string result = busquedaService.ObtenerUltimoComparendoCapturado();
+            pcomp = result;
+            Console.WriteLine($"result es: {result}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al asignar comparendo: {ex.Message}");
+        }
+    }
+
+    async Task ShowBusqueda()
+    {
+
+        await DialogService.OpenAsync<Busqueda>($"Busqueda Comparendos Por Cédula", new Dictionary<string, object>() { },
+        new DialogOptions() { Width = "770px", Height = "500px", Style = "border-radius:30px;", Draggable = true, CssClass = "rz-secondary-lighter" });
+        obtenercompare();
+    }
+
+}

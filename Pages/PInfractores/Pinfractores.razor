@@ -1,0 +1,262 @@
+﻿@page "/Infractores"
+
+@using Coactivos_Predial.Models;
+@using Coactivos_Predial.Shared.Services;
+@using Coactivos_Predial.Shared.Services.SPropietarios;
+@using System.Text;
+@inject NavigationManager NavigationManager
+@inject IpropietariosService InfractoresService;
+@inject DialogService dialogService
+@inject IJSRuntime js
+
+
+    
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                            <div class="card-header p-0" style="background-color: #112366; height: 41px;">
+                             <div class="row ps-1">
+                              <div class="col-8 mt-2 p-0">
+                               <h5 class="card-title  ms-3" style="color:white">Propietarios</h5>
+                              </div>
+                                <div class="col-md-3 mt-2">
+                                        <div class="input-group input-group-sm ">
+                                            <input type="text" id="buscarnit" name="searchString" class="form-control float-right mb-2  ms-5" @bind="buscarnit"
+                                                       placeholder="Buscar por cédula" />
+                                                <div class="input-group-append mb-2">
+                                                    <button type="button" @onclick="findbycedula" class="bg-white border-0 h-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="primary" class="bi bi-search" viewBox="0 0 16 16">
+                                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="ms-4 col p-0" style="margin-top: 0.5em;">
+                                        <RadzenButton type="button" Icon="add" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Primary" class="rz-border-radius-1" Click=@(args => MostrarModal(false)) Style="margin-top: -2%;"></RadzenButton>
+                                    </div>
+                                    </div>
+                            </div>
+                        <div class="card-body  mt-1">
+                            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowGrouping="false" AllowSorting="true" PageSize="8"
+                                            AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" Data="@infractores" TItem="Propietarios"
+                                            ColumnWidth="350px" LogicalFilterOperator="LogicalFilterOperator.Or" ShowPagingSummary="true"
+                                            IsLoading="@isLoading">
+                                <Columns>
+                                    <RadzenDataGridColumn TItem="Propietarios" Property="documento" Title="Documento" Frozen="true" Width="140px" Filterable HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Propietarios" Property="nombre" Title="Nombre" Frozen="true" Width="160px" Filterable HeaderCssClass="rz-background-color-primary-lighter" />
+                                   <RadzenDataGridColumn TItem="Propietarios" Property="tel" Title="Teléfono" Width="80px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Propietarios" Property="correo" Title="Email" Width="130px" Filterable="false" HeaderCssClass="rz-background-color-primary-lighter" />
+                                    <RadzenDataGridColumn TItem="Propietarios" Width="80px" Filterable="false" FilterValue="false" HeaderCssClass="rz-background-color-primary-lighter">
+                                        <Template Context="infractor">
+                                            <button type="button" style="font-size:12px; border-radius: 15px; height: 30px; display: flex; align-items: center;" class="btn btn-primary" @onclick="() => EditarInfractor(infractor)">
+                                                Editar
+                                            </button>
+                                        </Template>
+                                    </RadzenDataGridColumn>
+                                </Columns>
+                            </RadzenDataGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+
+<div class="modal rz-secondary-lightlight" id="detalleModal" tabindex="-1" style="display: @(mostrarModal ? "block" : "none");">
+    <div class="modal-dialog modal-lg" style="border-radius: 30px; box-shadow: 0px 8px 16px rgba(12, 12, 12, 0.8);">
+        <div class="modal-content" style="border-radius:30px;">
+            <div class="modal-header text-white " style="background-color: #3679D3; border-radius: 30px 30px 0 0; overflow: hidden; height:40px;">
+                <h5 class="modal-title">Editar Propietarios</h5>
+                <RadzenButton type="button" Size="ButtonSize.Small" ButtonStyle="ButtonStyle.Primary" class="rz-border-radius-1" Style="margin-top: 1%;">
+                    <span>&times;</span>
+                </RadzenButton>
+            </div>
+
+            <div class="modal-body bg-light bg-gradient">
+                @if (infractoresobj != null)
+                {
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-size:12px">Tipo Identificación</label>
+                                <select id="cars" class="form-control col-auto" style="font-weight: bold; font-size:12px" @bind="infractoresobj.tipo_id">
+                                    <option value="1">Cedula Ciudadania</option>
+                                    <option value="2">Tarjeta Identidad</option>
+                                    <option value="3">Cedula Extranjeria</option>
+                                    <option value="4">Nit</option>
+                                    <option value="6">Pasaporte</option>
+                                    <option value="7">Carnet Diplomatico</option>
+                                    <option value="9">Cedula Venezolana</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div>
+                                <label style="font-size:12px">Cédula Propietario</label>
+                                <input type="text" class="form-control" maxlength="13" style="font-weight: bold;" value="@infractoresobj.documento">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label style="font-size:12px">Nombre Propietario</label>
+                            <input type="text" onkeypress="return (event.charCode != 39 && event.charCode != 34 && event.charCode != 44)" class="form-control" maxlength="30" @bind="infractoresobj.nombre">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label style="font-size:12px">Correo:</label>
+                            <input type="text" onkeypress="return (event.charCode != 39 && event.charCode != 34 && event.charCode != 44)" class="form-control" maxlength="40" @bind="infractoresobj.correo">
+                        </div>
+                        <div class="col">
+                            <label style="font-size:12px">Téléfono:</label>
+                            <input type="text" onkeypress="return (event.charCode != 39 && event.charCode != 34 && event.charCode != 44)" class="form-control" maxlength="15" @bind="infractoresobj.tel">
+                        </div>
+
+                    </div>
+                }
+            </div>
+            <div class="modal-footer rz-secondary-lightlight border-0">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-secondary" @onclick="CerrarModal">Cerrar</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-primary bg-success text-white" @onclick="() => esModoEditar ? Actualizar(infractoresobj) : Agregar()">
+                            @if (esModoEditar)
+                            {
+                                <span>Actualizar</span>
+                            }
+                            else
+                            {
+                                <span>Agregar</span>
+                            }
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+    private bool mostrarModal = false;
+    private string buscarnit;
+    private Propietarios infractoresobj = new Propietarios();
+
+    private List<Propietarios> infractores { get; set; }
+
+    private bool esModoEditar;
+    //para radzen
+    IQueryable<Propietarios> data;
+    bool isLoading = false;
+
+
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        await ShowLoading();
+
+        const int cantidadInicial = 8;
+
+        var todosLosInfractores = await InfractoresService.GetAll();
+
+        if (todosLosInfractores != null && todosLosInfractores.Any())
+        {
+            infractores = todosLosInfractores.Take(cantidadInicial).ToList();
+            data = infractores.AsQueryable();
+        }
+
+    }
+
+
+    async Task ShowLoading()
+    {
+        isLoading = true;
+
+        await Task.Yield();
+
+        isLoading = false;
+    }
+
+    private async Task findbycedula()
+    {
+        var infractoresList = await InfractoresService.GetInfractoresByCedula(buscarnit);
+        if (infractoresList != null && infractoresList.Count > 0)
+        {
+             infractores = infractoresList;
+        }
+        else
+        {
+            infractores = new List<Propietarios>();
+         }
+    }
+
+
+
+    private async Task Agregar()
+    {
+        var result = await InfractoresService.Add(infractoresobj);
+        mostrarModal = false;
+    }
+
+    void EditarInfractor(Propietarios infractor)
+    {
+        infractoresobj = infractor;
+        esModoEditar = true;
+        mostrarModal = true;
+    }
+
+    private async Task Actualizar(Propietarios infractor)
+    {
+        var count = await InfractoresService.EditInfractores(infractor);
+
+        if (count > 0)
+        {
+            mostrarModal = true;
+            StateHasChanged();
+            mostrarModal = false;
+        }
+        else
+        {
+            Console.WriteLine("Error al actualizar el infractor.");
+        }
+    }
+
+
+
+
+
+    public void MostrarModal(bool nkey)
+    {
+        mostrarModal = true; esModoEditar = nkey;
+
+        if (esModoEditar && infractoresobj != null)
+        {
+        }
+        else
+        {
+            infractoresobj = new Propietarios(); // Ajusta esto según la estructura de tu aplicación
+        }
+    }
+
+
+    private void CerrarModal()
+    {
+        mostrarModal = false;
+    }
+
+    
+}

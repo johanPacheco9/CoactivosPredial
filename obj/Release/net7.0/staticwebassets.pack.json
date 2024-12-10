@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Dataset\\Coactivos_Predial\\Pages\\PConsulta\\Consulta.razor.js",
+      "PackagePath": "staticwebassets\\Pages\\PConsulta\\Consulta.razor.js"
+    },
+    {
+      "Id": "D:\\Dataset\\Coactivos_Predial\\wwwroot\\Js\\JavaScript.js",
+      "PackagePath": "staticwebassets\\Js\\JavaScript.js"
+    },
+    {
+      "Id": "D:\\Dataset\\Coactivos_Predial\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Dataset\\Coactivos_Predial\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Dataset\\Coactivos_Predial\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.Coactivos_Predial.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.build.Coactivos_Predial.props",
+      "PackagePath": "build\\Coactivos_Predial.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Coactivos_Predial.props",
+      "PackagePath": "buildMultiTargeting\\Coactivos_Predial.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildTransitive.Coactivos_Predial.props",
+      "PackagePath": "buildTransitive\\Coactivos_Predial.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

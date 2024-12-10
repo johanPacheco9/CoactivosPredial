@@ -1,0 +1,380 @@
+﻿@page "/Parametrospage"
+
+@using Coactivos_Predial.Models;
+@using Coactivos_Predial.Shared.Services;
+@using System.ComponentModel.DataAnnotations;
+@using Coactivos_Predial.Shared.Services.SParametros;
+@using System.Reflection;
+@inject IJSRuntime JSRuntime
+@inject DialogService DialogService
+@inject IParametroService ParametroService;
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header p-0" style="background-color:#112366; height: 31px ">
+                            <h5 class="card-title ms-3" style="color:white">Parámetros Del Sistema</h5>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <EditForm Model="@param_obj">
+                            <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+                                <li class="nav-item">
+                                    <button type="button" class="nav-link @(tab1 ? "active" : "")" id="pestañaLiquidacion" data-toggle="pill" href="#contenidoLiquidacion" role="tab" aria-controls="contenidoLiquidacion" aria-selected="true" @onclick="() => displayTabs(1)">Liquidación</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="button" class="nav-link @(tab3 ? "active" : "")" id="pestañaLiquidacion" data-toggle="pill" href="#contenidoLiquidacion" role="tab" aria-controls="contenidoLiquidacion" aria-selected="true" @onclick="() => displayTabs(3)">Valor Adicional</button>
+                                </li>
+                            </ul>
+
+                            @if (tab1)
+                            {
+                                <div class="tab-content" id="custom-content-below-tabContent">
+                                    <div class="tab-pane fade show active" id="contenidoLiquidacion" role="tabpanel" aria-labelledby="pestañaLiquidacion">
+                                        <div class="card-body">
+                                            <hr color="lightgray" style="background-color:ghostwhite" size=3>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                <label style="font-size:12px">Secretaría</label>
+                                                        <input type="text" maxlength="80" class="form-control col-md-7 col-auto" style="font-weight: bold;" @bind="param_obj.nombre">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                        <label style="font-size:12px">Ciudad</label>
+                                                        <input type="text" maxlength="40" class="form-control" @bind="param_obj.ciudad">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label style="font-size:12px">Dirección</label>
+                                                        <input type="text" maxlength="60" @bind="param_obj.dir" class="form-control col-auto">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label style="font-size:12px">Nit</label>
+                                                        <input type="text" maxlength="15" @bind="param_obj.nit" class="form-control col-auto">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label style="font-size:12px">Correo</label>
+                                                        <input type="text" maxlength="60" @bind="param_obj.correo" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label style="font-size:12px">Teléfono</label>
+                                                <input type="text" maxlength="15" @bind="param_obj.tel" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            @if (tab3)
+                            {
+                                <div class="tab-pane" id="custom-content-below-messages" role="tabpanel" aria-labelledby="pestañaResoluciones">
+                                    <div class="card-body">
+                                        <hr color="lightgray" style="background-color:ghostwhite" size=3>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" @bind="param_obj.cobra_adicional" type="checkbox">
+                                                    <label style="font-size:12px" class="form-check-label">Cobra Valor Adicional</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                <div class="card-body  mt-1">
+                                    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowGrouping="false" AllowSorting="true" PageSize="11"
+                                                    AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" Data="@estados_list" TItem="Estados_proc"
+                                                    ColumnWidth="350px" LogicalFilterOperator="LogicalFilterOperator.Or" ShowPagingSummary="true"
+                                                    IsLoading="@isLoading">
+                                        <Columns>
+                                            <RadzenDataGridColumn TItem="Estados_proc" Property="id" Title="Id" Width="70px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                            <RadzenDataGridColumn TItem="Estados_proc" Property="nombre" Title="Estado Del Proceso" Width="160px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                            <RadzenDataGridColumn TItem="Estados_proc" Property="porc" Title="Porcentaje" Width="80px" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter" />
+                                            <RadzenDataGridColumn TItem="Estados_proc" Width="80px" FilterValue="false" Filterable="false" HeaderCssClass="rz-background-color-secondary-lighter">
+                                                <Template Context="agentes">
+                                                    <button type="button" class="btn btn-primary" Style="font-size:12px;border-radius:15px;" @onclick="() => Editar(agentes)">
+                                                        Editar
+                                                    </button>
+                                                </Template>
+                                            </RadzenDataGridColumn>
+                                        </Columns>
+                                    </RadzenDataGrid>
+                                </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="card-footer">
+                                <div class="row bg-transparent">
+                                    <div class="col-sm-1">
+                                        <button type="button" Style="font-size:12px; border-radius:15px;" @onclick="Editparm" class="btn btn-dark">Guardaar</button>
+                                        <input type="hidden" @bind="param_obj.id" id="lId" />
+                                    </div>
+                                    <div class="col-sm-3 ms-2">
+                                        <a href="/Principal" Style="font-size:12px; border-radius:15px;" class="btn btn-primary pull-right">Cerrar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div class="modal rz-secondary-lightlight" id="detalleModal" tabindex="-1" style="display: @(mostrarModal1 ? "block" : "none");">
+    <div class="modal-dialog modal-lg" style="border-radius: 30px; box-shadow: 0px 8px 16px rgba(12, 12, 12, 0.8);">
+        <div class="modal-content" style="border-radius:30px;">
+            <div class="modal-header text-white " style="background-color: #112366; border-radius: 30px 30px 0 0; overflow: hidden; height:40px;">
+                <h5 class="modal-title">Configuracion Valores Adicionales</h5>
+                <button type="button" class="close" @onclick="CerrarModal1">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-light bg-gradient">
+                @if (agentesobj != null)
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div>
+                                    <label style="font-size:12px">Id</label>
+                                    <input type="text" class="form-control w-50" @bind="agentesobj.id" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div>
+                                <label style="font-size:12px">Detalle Proceso</label>
+                                <input type="text" class="form-control" style="font-weight: bold;" @bind="agentesobj.nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label style="font-size:12px">Porcentaje Vlr Adicional</label>
+                            <input type="text" class="form-control" maxlength="20" @bind="agentesobj.porc">
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-secondary" @onclick="CerrarModal1">Cerrar</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" Style="font-size:12px; border-radius:15px;" class="btn btn-primary bg-success text-white" @onclick="() => Actualizar(agentesobj)">
+                         <span>Actualizar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code
+{
+    private bool mostrarModal = false;
+    private bool mostrarModal1 = false;
+    private bool tab1 = true;
+    private bool tab2 = false;
+    private bool tab3 = false;
+    private bool tab4 = false;
+    private bool tab5 = false;
+    public bool isLoading;
+    private bool esModoEditar = false;
+    private Estados_proc agentesobj = new Estados_proc();
+    private List<Estados_proc> estados_list { get; set; }
+    IQueryable<Estados_proc> data;
+
+    public Parametros param_obj { get; set; } = new Parametros    { };
+    public string errorMessage { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+       await getparametros();
+
+       estados_list = await ParametroService.Getlist();
+       data = estados_list.AsQueryable();
+      
+    }
+
+    private async Task Actualizar(Estados_proc agentes)
+    {
+        var count = await ParametroService.EditEstados(agentes);
+
+        if (count > 0)
+        {
+            mostrarModal1 = true;  
+            StateHasChanged();
+            mostrarModal1 = false;
+        }
+        else
+        {
+            // Manejar el caso en que la actualización no tuvo éxito
+            Console.WriteLine("Error al actualizar el infractor.");
+        }
+    }
+
+    void Editar(Estados_proc agentes)
+    {
+        agentesobj = agentes;
+        esModoEditar = true;
+        mostrarModal1 = true;
+    }
+
+    private async Task getparametros()
+    {
+     param_obj =   await ParametroService.GetParametroById(1);    
+    }
+    
+    private void CerrarModal()
+    {
+        mostrarModal = false;
+    }
+    
+    private void CerrarModal1()
+    {
+        mostrarModal1 = false;
+    }
+
+    public void displayTabs(int TabNumber)
+    {
+        switch (TabNumber)
+        {
+            case 1:
+                this.tab1 = true;
+                this.tab2 = false;
+                this.tab3 = false;
+                this.tab4 = false;
+                this.tab5 = false;
+                break;
+            case 2:
+                this.tab1 = false;
+                this.tab2 = true;
+                this.tab3 = false;
+                this.tab4 = false;
+                this.tab5 = false;
+                break;
+            case 3:
+                this.tab1 = false;
+                this.tab2 = false;
+                this.tab3 = true;
+                this.tab4 = false;
+                this.tab5 = false;
+                break;
+            case 4:
+                this.tab1 = false;
+                this.tab2 = false;
+                this.tab3 = false;
+                this.tab4 = true;
+                this.tab5 = false;
+                break;
+            case 5:
+                this.tab1 = false;
+                this.tab2 = false;
+                this.tab3 = false;
+                this.tab4 = false;
+                this.tab5 = true;
+                break;
+        }
+
+    }
+
+    protected async Task Editparm()
+    {
+        //aplico la validacion.
+        if (IsValid(param_obj))
+        {
+            try
+            {
+
+                // Aquí debes llamar a tu servicio para agregar el comparendo
+                // await ParametrosService.EditParametros(llave,param_obj);
+                await ParametroService.EditParametros(1,param_obj);
+
+                var confirmationResult = await this.DialogService.Alert("Informacion Atualizada.", "Parametros", new AlertOptions() { OkButtonText = "Ok" });
+
+      //          ClearForm();
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Error al agregar el Infractor: {ex.Message}";
+            }
+        }
+        else
+        {
+           await DialogService.Alert("Campos Vacios.", "Alerta", new AlertOptions() { OkButtonText = "Ok", Style = "border-radius:30px;" });
+        }
+    }
+
+
+    public void MostrarModal(bool nkey)
+    {
+        mostrarModal = true; esModoEditar = nkey;
+    }
+
+    public void MostrarModal1(bool nkey)
+    {
+        mostrarModal1 = true; esModoEditar = nkey;
+
+        if (esModoEditar && agentesobj != null)
+        {
+        }
+        else
+        {
+            agentesobj = new Estados_proc();
+        }
+    }
+
+    private bool IsValid(Parametros param_obj)
+    {
+        PropertyInfo[] properties = param_obj.GetType().GetProperties();
+        List<string> propertiesToValidate = new List<string>
+        {
+            "cedula",
+            "apellidos",
+            "nombre",
+            "direccion"
+            };
+        foreach (PropertyInfo property in properties)
+        {
+            if (propertiesToValidate.Contains(property.Name) && property.PropertyType == typeof(string))
+            {
+                string value = (string)property.GetValue(param_obj);
+                if (string.IsNullOrEmpty(value))
+                {
+                    errorMessage = $"El campo '{property.Name}' es obligatorio.";
+                    return false;
+                }
+            }
+
+         }
+
+        return true;
+    }
+}

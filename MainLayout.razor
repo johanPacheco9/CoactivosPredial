@@ -1,0 +1,121 @@
+﻿ @inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Authentication
+@using Coactivos_Predial.Auth
+@using Coactivos_Predial.Models;
+@using Coactivos_Predial.Shared.Models;
+@using Coactivos_Predial.Shared.Services;
+@using Radzen.Blazor
+@using Radzen;
+@inject IHttpContextAccessor context;
+@inject NavigationManager _navigation
+
+
+
+<AuthorizeView>
+    
+    <Authorized>
+
+        <PageTitle>Procesos ®</PageTitle>
+        <RadzenDialog />
+        <RadzenLayout>
+
+            <RadzenHeader Style="background-color: #240A49;">
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="16">
+                    <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" />
+                    <label style="font-size: 1.5rem; font-weight: bold; color:white">Coactivos @municipio ®</label>
+                    <div style="flex-grow: 1;"></div> <!-- Este div expandirá el espacio restante -->
+                    <div class="d-flex align-items-center">
+                        <RadzenLabel Text="@context.User.Identity?.Name" Style="color: white; margin-right: 1rem;" />
+
+                        <NavLink class="nav-link mt-2" href="/Perfil" Match="NavLinkMatch.All" Style="color: white; text-decoration: none;">
+                            <RadzenIcon Icon="account_circle" />
+                        </NavLink>
+                        <NavLink class="nav-link mt-2" href="/PLogOut/CerrarSesion" Match="NavLinkMatch.All" Style="color: white; text-decoration: none;" >
+                            <RadzenIcon Icon='<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/><path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/></svg>'/>
+                        </NavLink>
+                    </div>
+                </RadzenStack>
+            </RadzenHeader>
+
+
+
+
+            <RadzenSidebar Responsive="true" Style="width: max-content; max-width:11.2rem">
+                <RadzenPanelMenu DisplayStyle="@(sidebarExpanded ? MenuItemDisplayStyle.IconAndText : MenuItemDisplayStyle.Icon)" Style="background-color: #dimgray; color: white; border:none; border:none" ShowArrow="true">
+                    <RadzenPanelMenuItem Text="Consulta Procesos" class="border-0" Icon="home" Path="/Consultapage" Style="color:white" />
+                    <!--Desplegable-->
+                    <RadzenPanelMenuItem Text="Básicos" class="border-0" Icon='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-nut-fill" viewBox="0 0 16 16"><path d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196"/></svg>' IconColor="grey">
+                        <RadzenPanelMenuItem Text="Consulta Procesos" Icon="announcement" Path="/Consultapage" IconColor="white" Style="color:white;" />
+                        <RadzenPanelMenuItem Text="Propietarios" Icon="account_box" IconColor="white" Path="/Infractores" Style="color:white;" />
+                    </RadzenPanelMenuItem>
+
+                    <RadzenPanelMenuItem Text="Procesos" class="border-0" Icon='<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/><path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/></svg>' IconColor="grey">
+                        <RadzenPanelMenuItem Text="Importación" Icon="account_box" IconColor="white" Path="/ImportacionPage" Style="color:white" />
+                    </RadzenPanelMenuItem>
+
+                    <RadzenPanelMenuItem Text="Configuración" class="border-0" Icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"><path d="m2.831 19.754-1.488 1.489 1.414 1.414 1.488-1.489A4.959 4.959 0 0 0 6 21.9V24h2v-2.1a5 5 0 0 0 1.754-.73l1.488 1.488 1.414-1.415-1.488-1.487A4.936 4.936 0 0 0 11.9 18H14v-2h-2.1a4.98 4.98 0 0 0-.731-1.755l1.488-1.487-1.414-1.414-1.489 1.488A4.926 4.926 0 0 0 8 12.1V10H6v2.1a4.963 4.963 0 0 0-1.754.73l-1.488-1.486-1.415 1.414 1.488 1.488A4.963 4.963 0 0 0 2.1 16H0v2h2.1a4.947 4.947 0 0 0 .731 1.754zM21.8 3.615l1.15-1.149-1.414-1.414L20.387 2.2A4.477 4.477 0 0 0 19 1.621V0h-2v1.621a4.43 4.43 0 0 0-1.385.578l-1.15-1.149-1.414 1.414L14.2 3.613A4.477 4.477 0 0 0 13.621 5H12v2h1.621a4.453 4.453 0 0 0 .579 1.387l-1.149 1.149 1.414 1.414 1.15-1.15a4.43 4.43 0 0 0 1.385.579V12h2v-1.621a4.475 4.475 0 0 0 1.387-.579l1.148 1.148 1.414-1.414L21.8 8.387A4.475 4.475 0 0 0 22.379 7H24V5h-1.621a4.44 4.44 0 0 0-.579-1.385zM18 7.5A1.5 1.5 0 1 1 19.5 6 1.5 1.5 0 0 1 18 7.5z"/></svg>' IconColor="grey">
+                        <RadzenPanelMenuItem Text="Parámetros" Icon="account_box" IconColor="white" Path="/Parametrospage" Style="color:white" />
+                        <RadzenPanelMenuItem Text="Usuarios" Icon="account_box" IconColor="white" Path="/Usuariospage" Style="color:white" />
+                    </RadzenPanelMenuItem>
+
+
+                    <RadzenPanelMenuItem Text="Coactivo" class="border-0" Icon='<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20.5393 19.0413C20.3893 19.1913 20.1993 19.2613 20.0093 19.2613C19.8193 19.2613 19.6293 19.1913 19.4793 19.0413L14.5293 14.0913L15.0593 13.5613L15.5893 13.0312L20.5393 17.9812C20.8293 18.2712 20.8293 18.7513 20.5393 19.0413Z" fill="currentColor"></path><path d="M6.46937 9.27814L12.2694 15.0781C12.6594 15.4681 12.6594 16.0981 12.2694 16.4881L11.3694 17.3981C10.5594 18.1981 9.27938 18.1981 8.47937 17.3981L4.13938 13.0581C3.34938 12.2681 3.34938 10.9781 4.13938 10.1781L5.04938 9.26814C5.43938 8.88814 6.07937 8.88814 6.46937 9.27814Z" fill="currentColor"></path><path d="M18.5898 10.1897L14.7798 13.9897C14.3798 14.3897 13.7398 14.3897 13.3398 13.9897L7.55977 8.20969C7.15977 7.80969 7.15977 7.16969 7.55977 6.76969L11.3698 2.95969C12.1598 2.16969 13.4498 2.16969 14.2498 2.95969L18.5898 7.29969C19.3798 8.09969 19.3798 9.37969 18.5898 10.1897Z" fill="currentColor"></path><path d="M8 21.75H2C1.59 21.75 1.25 21.41 1.25 21C1.25 20.59 1.59 20.25 2 20.25H8C8.41 20.25 8.75 20.59 8.75 21C8.75 21.41 8.41 21.75 8 21.75Z" fill="currentColor"></path></g></svg>' IconColor="grey">
+                    <RadzenPanelMenuItem Text="Persuasivos" Icon="account_box" IconColor="yellow" Path="/Persuasivos" Style="color:white" />
+                    <RadzenPanelMenuItem Text="Coactivo" Icon="announcement" Path="/Coactivospage" IconColor="red" Style="color:white" />
+                    <RadzenPanelMenuItem Text="Informes" Icon="account_box" IconColor="black" Path="/Rep_coactivopage" Style="color:white" />
+                    </RadzenPanelMenuItem>
+
+
+
+
+
+
+
+                    <RadzenPanelMenuItem Text="Reportes" class="border-0" Icon='<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-clipboard2-pulse-fill" viewBox="0 0 16 16"><path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/><path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M9.98 5.356 11.372 10h.128a.5.5 0 0 1 0 1H11a.5.5 0 0 1-.479-.356l-.94-3.135-1.092 5.096a.5.5 0 0 1-.968.039L6.383 8.85l-.936 1.873A.5.5 0 0 1 5 11h-.5a.5.5 0 0 1 0-1h.191l1.362-2.724a.5.5 0 0 1 .926.08l.94 3.135 1.092-5.096a.5.5 0 0 1 .968-.039Z"/></svg>' IconColor="grey">
+                        <RadzenPanelMenuItem Text="Estaditicas" Icon="account_box" IconColor="white" Path="/Pestadisticas" Style="color:white" />
+                    </RadzenPanelMenuItem>
+                </RadzenPanelMenu>
+            </RadzenSidebar>
+            <RadzenBody>
+                <div class="rz-p-2">
+                    @Body
+                </div>
+            </RadzenBody>
+            <RadzenFooter Style="background-color: black ; color:white; height:40px;">
+                <div>
+                    <span class="mb-2 " style="font-size:12px;">Dataset-Software Cel. 3187729648   </span>
+                </div>
+            </RadzenFooter>
+        </RadzenLayout>
+
+    </Authorized>
+    <NotAuthorized>
+        <p>No autorizado</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    private string municipio; 
+
+    bool sidebarExpanded = true;
+    //    public List<Rmenus> Itemlist { get; set; } = new List<Rmenus>();
+
+    protected override async Task OnInitializedAsync()
+    { municipio = MunicipioSingleton.Municipio;
+        //        Console.WriteLine($"listar menus ");
+        //        var xItemlist = await menusServices.GetList(1);
+        //        Itemlist = xItemlist.ToList();
+    }
+
+
+    private void NavegarPerfil()
+    {
+        _navigation.NavigateTo("/Perfil");
+    }
+
+
+   
+
+}
